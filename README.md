@@ -1,6 +1,6 @@
 # animal-health
 
-Hello, I'll implemented this test task in Angular way to see how I understand how Anugal works.
+Hello, I'll implemented this test task in Angular way to see how I understand Anugal works.
 
 There is also one more good way how to implement it in non standart way and
 imporeve performance and win in optimization when we will have 300-400-500 rows in the table.

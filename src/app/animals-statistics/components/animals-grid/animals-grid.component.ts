@@ -1,24 +1,50 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, map, Observable, Subject, take, takeUntil } from 'rxjs';
+import { 
+  ChangeDetectionStrategy, 
+  Component, 
+  ElementRef, 
+  OnDestroy, 
+  OnInit, 
+  ViewChild 
+} from '@angular/core';
+import { 
+  BehaviorSubject, 
+  map, 
+  Observable, 
+  Subject, 
+  take, 
+  takeUntil 
+} from 'rxjs';
 import { AnimalsService } from 'src/app/animals-statistics/services/animals.service';
 import { Animal } from 'src/app/animals-statistics/shared/animal';
 import { AnimalsResponse } from 'src/app/animals-statistics/shared/animals-response.type';
 import { AnimalHelperService } from '../../services/animal-helper.service';
-import { AnimalButtonAttributes, ANIMAL_BUTTON_ACTIONS } from '../../shared/animal-button.type';
+import { 
+  AnimalButtonAttributes, 
+  ANIMAL_BUTTON_ACTIONS 
+} from '../../shared/animal-button.type';
 import { GridAction } from '../../shared/grid-action.type';
 
 @Component({
   selector: 'animals-grid',
   templateUrl: './animals-grid.component.html',
-  styleUrls: ['./animals-grid.component.scss']
+  styleUrls: ['./animals-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnimalsGridComponent implements OnInit, OnDestroy {
   public dataLoaded$: Observable<boolean>;
+  /**
+   * Really nice to use async pipes to pass data to the view especially for components which are using 
+   * ChangeDetectionStrategy.OnPush... first of all because it's no need to call unsubscribe on it and also
+   * there is no to detectChanges() on data change.
+   * Here I used BehaviorSubject, becase I'll need to manipulate with the data from animals and form observable
+   * it's not possible to get Animals array in short way, like eg it's possible with BehaviorSubject ==> BehaviorSubject.getValue()
+   * and also with BehaviorSubject it's possible quit easy update it via next(...) method 
+   */
   public animals$: BehaviorSubject<Animal[]> = new BehaviorSubject<Animal[]>([]);
   public newAnimal: Animal | null;
   public isEditAll: boolean = false;
 
-  // emulation for list lazy loading on scroll
+  // emulation for list lazy loading on scroll to store data which isn't still rendered on the screen
   private localAnimalsList: Animal[];
   private ngUnsubscribe: Subject<void> = new Subject<void>();
 
@@ -43,7 +69,14 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
     this.newAnimal = this.animalHelperService.getModel();
   }
 
-  public onClick(event: MouseEvent): void {
+  /**
+   * Listening only one click delete animal event (attached on tbody) instead of additing
+   * click event on each delete buttonn ander animal item component...
+   * In this case, we have significantly reduced the number of events listeners on the page
+   * 
+   * Same can be done for eg edit button event listener (pencil btn) etc.
+   */
+  public onDeleteAnimalClick(event: MouseEvent): void {
     this.animalHelperService.getButtonAttributes(event)
       .pipe(take(1))
       .subscribe((attrs: AnimalButtonAttributes | null) => {
@@ -97,6 +130,8 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
 
   private createAnimal(animal: Animal): void {
     this.animalsService.createAnimal(animal).subscribe(() => {
+      // Just additing some random ids to be able in futere detect item for delete action...In real life BE needs to provide the unique id
+      animal.animalId = this.animalHelperService.getRandomId();
       this.animals$.next([animal, ...this.animals$.getValue()]);
     });
   }
@@ -108,6 +143,10 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Rendering limited items number on the screen in case we have situation like in this code sample
+   * where we have to load all 100 enteties and by some reason server cant return lazy loaded way data
+   */
   private loadList(animals: Animal[]): void {
     this.localAnimalsList = [...animals];
     const splicedAnimalsList = this.localAnimalsList.splice(0, 20);

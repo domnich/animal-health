@@ -1,6 +1,17 @@
-import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, map, Observable, of, shareReplay, Subject } from "rxjs";
+import { 
+  HttpClient, 
+  HttpErrorResponse, 
+  HttpResponse 
+} from "@angular/common/http";
+import { 
+  catchError,
+  map, 
+  Observable, 
+  of, 
+  shareReplay, 
+  Subject 
+} from "rxjs";
 import { environment } from "src/environments/environment";
 import { Animal } from "../shared/animal";
 import { AnimalsResponse } from "../shared/animals-response.type";

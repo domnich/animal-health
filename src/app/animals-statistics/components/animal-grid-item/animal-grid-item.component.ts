@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { 
+  ChangeDetectionStrategy, 
+  Component, 
+  EventEmitter, 
+  Input, 
+  OnInit, 
+  Output 
+} from '@angular/core';
 import { UpdateValue } from 'src/app/shared/editable-item/updated-value.type';
 import { AnimalHelperService } from '../../services/animal-helper.service';
 import { Animal, AnimalKeys } from '../../shared/animal';

@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { 
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output 
+} from '@angular/core';
 import { IconName } from './icon-name.type';
-
 
 @Component({
   selector: 'app-svg-icon',
@@ -9,9 +15,11 @@ import { IconName } from './icon-name.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgIconComponent implements OnInit {
+  public url: string;
+
   @Input() public icon: IconName;
   @Output() public onClick: EventEmitter<void> = new EventEmitter<void>();
-  public url: string;
+
   constructor() { }
 
   ngOnInit(): void {

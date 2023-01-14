@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { AppButton, APP_BUTTON } from './app-button.type';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
+import {
+  AppButton,
+  APP_BUTTON 
+} from './app-button.type';
 
 @Component({
   selector: 'app-button',

@@ -40,10 +40,10 @@
             <th>minValueDateTime</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody (click)="onDeleteAnimalClick($event)">
         <tr *ngIf="newAnimal" animal-grid-item [isEditableView]="true" [(animal)]="newAnimal" class="add-new-animal">
         </tr>
-        <tr *ngFor="let animal of animals; even as isEven; let i=index;" attr.data-index="{{i}}" [class.even]="isEven" (click)="onClick($event)"
+        <tr *ngFor="let animal of animals; even as isEven; let i=index;" attr.data-index="{{i}}" [class.even]="isEven"
             animal-grid-item [animal]="animal"></tr>
     </tbody>
 </table>

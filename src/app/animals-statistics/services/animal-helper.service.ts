@@ -5,6 +5,10 @@ import { Animal, AnimalKeys } from "../shared/animal";
 import { AnimalButtonAttributes, ANIMAL_BUTTON_ACTIONS } from "../shared/animal-button.type";
 import { GridAction } from "../shared/grid-action.type";
 
+/**
+ * Service contains list of usefull functions which could be easelly used in any place where we manipulate
+ * with Animal data (animal logic related helpers functions)
+ */
 @Injectable()
 export class AnimalHelperService {
     private intersectionObserver: IntersectionObserver;
@@ -48,8 +52,7 @@ export class AnimalHelperService {
     public getUpdatedList(animals: Animal[], animal: Animal): Animal[] {
         /**
          * Check done as  `animalInArray.animalId == animal.animalId || animalInArray.cowId == animal.cowId`
-         * just because some animal object have animalId and not cowId, another objects have cowId and not animalId
-         * I think on prod there should be some uniq id for each entity
+         * just because some animal object have animalId and not cowId, another objects have cowId and dont not animalId
          */
         const index: number = animals.findIndex((animalInArray: Animal) =>
             animalInArray.animalId == animal.animalId || animalInArray.cowId == animal.cowId);
@@ -107,6 +110,10 @@ export class AnimalHelperService {
         };
         this.intersectionObserver = new IntersectionObserver(handleIntersection, config);
         this.intersectionObserver.observe(entry.nativeElement);
+    }
+
+    public getRandomId(): string {
+        return (Math.random() * (1000000 - 0) + 0).toFixed();
     }
 
     private getParent(event: MouseEvent): HTMLElement | null {

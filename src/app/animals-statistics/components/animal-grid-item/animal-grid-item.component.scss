@@ -1,0 +1,12 @@
+:host {
+    td {
+        min-width: 100px;
+        text-align: left;
+        padding: 0 5px;
+        box-sizing: border-box;
+
+        &.has-hover:hover {
+            background: #ccc;
+        }
+    }
+}

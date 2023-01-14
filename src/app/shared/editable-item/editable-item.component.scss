@@ -1,0 +1,41 @@
+:host {
+    .editable {
+        padding-right: 18px;
+        position: relative;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+
+        .buttons {
+            display: flex;
+        }
+
+        &:hover {
+            .edit-btn {
+                display: block;
+            }
+        }
+
+        .edit-control {
+            margin-left: 10px;
+        }
+
+        .edit {
+            display: flex;
+            align-items: center;
+        }
+
+        .edit-btn {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin-top: -8px;
+            display: none;
+        }
+
+        .editable-input {
+            width: 100px;
+            height: 20px;
+        }
+    }
+}

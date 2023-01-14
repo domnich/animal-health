@@ -1,0 +1,31 @@
+:host {
+    button:disabled,
+    button[disabled] {
+        opacity: 0.55;
+        cursor: not-allowed;
+    }
+
+    button {
+        border-radius: 5px;
+        color: #fff;
+        border: 0;
+        padding: 5px;
+        cursor: pointer;
+
+        &.primary {
+            background: #ffc107;
+        }
+
+        &.danger {
+            background: #dc3545;
+        }
+
+        &.success {
+            background: #28a745;
+        }
+
+        &.secondary {
+            background: #6c757d;
+        }
+    }
+}

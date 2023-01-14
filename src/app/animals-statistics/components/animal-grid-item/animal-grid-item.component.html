@@ -1,0 +1,111 @@
+<td class="row-controls">
+    <app-button *ngIf="!isEditableView; else showSaveBtn" [type]="'danger'" attr.data-animal-action="{{actionDelete}}"
+        attr.data-animal-id="{{animal.animalId || animal.cowId}}">
+        Delete
+    </app-button>
+    <ng-template #showSaveBtn>
+        <app-button [disabled]="isEmptyObject" [type]="'primary'" attr.data-animal-action="{{actionDelete}}"
+            (click)="create()" attr.data-animal-id="{{animal.animalId || animal.cowId}}">
+            Create
+        </app-button>
+        <app-button [type]="'secondary'" attr.data-animal-action="{{actionDelete}}" (click)="cancel()"
+            attr.data-animal-id="{{animal.animalId || animal.cowId}}">
+            Cancel
+        </app-button>
+    </ng-template>
+</td>
+<td>
+    <editable-item [value]="animal.type" (valueChange)="onValueChange($event)" [key]="'type'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)">
+    </editable-item>
+</td>
+<td>{{animal.cowId}}</td>
+<td>{{animal.animalId}}</td>
+<td>{{animal.eventId}}</td>
+<td>
+    <editable-item [value]="animal.lactationNumber" (valueChange)="onValueChange($event)" [key]="'lactationNumber'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.daysInLactation" (valueChange)="onValueChange($event)" [key]="'daysInLactation'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.ageInDays" (valueChange)="onValueChange($event)" [key]="'ageInDays'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    {{animal.startDateTime | date:'short'}}
+</td>
+<td>{{animal.reportingDateTime | date:'short'}}</td>
+<td>
+    <editable-item [value]="animal.sire" [key]="'sire'" (valueChange)="onValueChange($event)"
+        [inputOnly]="isEditableView" (update)="updateItem($event)">
+    </editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.breedingNumber" (valueChange)="onValueChange($event)" [key]="'breedingNumber'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.isOutOfBreedingWindow" (valueChange)="onValueChange($event)"
+        [key]="'isOutOfBreedingWindow'" [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.interval" (valueChange)="onValueChange($event)" [key]="'interval'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.newborns" (valueChange)="onValueChange($event)" [key]="'newborns'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.destinationGroup" (valueChange)="onValueChange($event)" [key]="'destinationGroup'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.destinationGroupName" (valueChange)="onValueChange($event)"
+        [key]="'destinationGroupName'" [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.calvingEase" (valueChange)="onValueChange($event)" [key]="'calvingEase'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.daysInPregnancy" (valueChange)="onValueChange($event)" [key]="'daysInPregnancy'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.oldLactationNumber" (valueChange)="onValueChange($event)"
+        [key]="'oldLactationNumber'" [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.currentGroupName" (valueChange)="onValueChange($event)" [key]="'currentGroupName'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>{{animal?.newGroupId}}</td>
+<td>
+    <editable-item [value]="animal.newGroupName" (valueChange)="onValueChange($event)" [key]="'newGroupName'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>{{animal?.currentGroupId}}</td>
+<td>
+    <editable-item [value]="animal.heatIndexPeak" (valueChange)="onValueChange($event)" [key]="'heatIndexPeak'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.alertType" (valueChange)="onValueChange($event)" [key]="'alertType'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>
+    <editable-item [value]="animal.duration" (valueChange)="onValueChange($event)" [key]="'duration'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>{{animal?.originalStartDateTime | date:'short'}}</td>
+<td>{{animal?.endDateTime | date:'short'}}</td>
+<td>
+    <editable-item [value]="animal.healthIndex" (valueChange)="onValueChange($event)" [key]="'healthIndex'"
+        [inputOnly]="isEditableView" (update)="updateItem($event)"></editable-item>
+</td>
+<td>{{animal?.endDate | date:'short'}}</td>
+<td>{{animal?.minValueDateTime | date:'short'}}</td>

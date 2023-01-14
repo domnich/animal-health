@@ -1,0 +1,50 @@
+<app-loader *ngIf="!(dataLoaded$ | async)"></app-loader>
+<table class="animals-greed" *ngIf="(animals$ | async) as animals">
+    <thead>
+        <tr *ngIf="animals.length">
+            <th>
+                <app-button (onClick)="addNewEntity()" [type]="'success'">
+                    Add New
+                </app-button>
+            </th>
+            <th>Type</th>
+            <th>Cow Id</th>
+            <th>Animal Id</th>
+            <th>Event Id</th>
+            <th>Lactation</th>
+            <th>Days In Lactation</th>
+            <th>Age In Days</th>
+            <th>Start Date Time</th>
+            <th>Reporting Date Time</th>
+            <th>Sire</th>
+            <th>Breeding Number</th>
+            <th>Is Out Of Breeding Window</th>
+            <th>Interval</th>
+            <th>Newborns</th>
+            <th>Destination Group</th>
+            <th>Destination Name</th>
+            <th>Calving Ease</th>
+            <th>days In Pregnancy</th>
+            <th>Old Lactation Number</th>
+            <th>Current Group Name</th>
+            <th>New Group Id</th>
+            <th>New Group Name</th>
+            <th>Current Group Id</th>
+            <th>Heat Index Peak</th>
+            <th>Alert Type</th>
+            <th>Duration</th>
+            <th>Original Start Date Time</th>
+            <th>End Date Time</th>
+            <th>Health Index</th>
+            <th>End Date</th>
+            <th>minValueDateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="newAnimal" animal-grid-item [isEditableView]="true" [(animal)]="newAnimal" class="add-new-animal">
+        </tr>
+        <tr *ngFor="let animal of animals; even as isEven; let i=index;" attr.data-index="{{i}}" [class.even]="isEven" (click)="onClick($event)"
+            animal-grid-item [animal]="animal"></tr>
+    </tbody>
+</table>
+<div #detectScroll>&nbsp;</div>

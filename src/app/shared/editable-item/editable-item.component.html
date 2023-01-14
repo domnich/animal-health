@@ -1,0 +1,20 @@
+<div class="editable">
+    <div *ngIf="isTextView && !inputOnly; else edit">
+        <span>
+            {{value}}
+        </span>
+        <app-svg-icon (onClick)="onEditClick()" class="edit-btn" [icon]="'edit'">
+        </app-svg-icon>
+    </div>
+    <ng-template #edit>
+        <div class="edit">
+            <input class="editable-input" type="text"  [(ngModel)]="inputValue" (ngModelChange)="onChange($event)" />
+            <div class="buttons" *ngIf="!inputOnly">
+                <app-svg-icon (onClick)="onUpdateClick()" class="edit-control" [icon]="'save'">
+                </app-svg-icon>
+                <app-svg-icon (onClick)="onCancelClick()" class="edit-control" [icon]="'cancel'">
+                </app-svg-icon>
+            </div>
+        </div>
+    </ng-template>
+</div>

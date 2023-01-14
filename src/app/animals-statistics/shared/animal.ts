@@ -1,0 +1,36 @@
+export interface Animal {
+    type: string;
+    cowId: string;
+    animalId: string;
+    eventId: string;
+    deletable: string;
+    lactationNumber: string;
+    daysInLactation: string;
+    ageInDays: string;
+    startDateTime: string;
+    reportingDateTime: string;
+    sire?: string;
+    breedingNumber?: string;
+    isOutOfBreedingWindow?: string;
+    interval?: string;
+    newborns?: string;
+    destinationGroup?: string;
+    destinationGroupName?: string;
+    calvingEase?: string;
+    daysInPregnancy?: string;
+    oldLactationNumber?: string;
+    currentGroupName?: string;
+    newGroupId?: string;
+    newGroupName?: string;
+    currentGroupId?: string;
+    heatIndexPeak?: string;
+    alertType?: string;
+    duration?: string;
+    originalStartDateTime?: string;
+    endDateTime?: string;
+    healthIndex?: string;
+    endDate?: string;
+    minValueDateTime?: string;
+};
+
+export type AnimalKeys = keyof Animal;

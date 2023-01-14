@@ -4,7 +4,7 @@ import { AnimalsService } from 'src/app/animals-statistics/services/animals.serv
 import { Animal } from 'src/app/animals-statistics/shared/animal';
 import { AnimalsResponse } from 'src/app/animals-statistics/shared/animals-response.type';
 import { AnimalHelperService } from '../../services/animal-helper.service';
-import { ANIMAL_BUTTON_ACTIONS } from '../../shared/animal-button.type';
+import { AnimalButtonAttributes, ANIMAL_BUTTON_ACTIONS } from '../../shared/animal-button.type';
 import { GridAction } from '../../shared/grid-action.type';
 
 @Component({
@@ -41,6 +41,16 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
 
   public addNewEntity(): void {
     this.newAnimal = this.animalHelperService.getModel();
+  }
+
+  public onClick(event: MouseEvent): void {
+    this.animalHelperService.getButtonAttributes(event)
+      .pipe(take(1))
+      .subscribe((attrs: AnimalButtonAttributes | null) => {
+        if (attrs) {
+          this.deleteAnimal(attrs.id);
+        }
+      });
   }
 
   private getAnimalsList(): void {
@@ -82,10 +92,6 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
       case ANIMAL_BUTTON_ACTIONS.UPDATE:
         this.animalsService.updateAnimal(animal).subscribe();
         break;
-      case ANIMAL_BUTTON_ACTIONS.DELETE:
-        this.deleteAnimal(animal);
-       
-        break;
     }
   }
 
@@ -95,9 +101,9 @@ export class AnimalsGridComponent implements OnInit, OnDestroy {
     });
   }
 
-  private deleteAnimal(animal: Animal): void {
-    this.animalsService.deleteAnimal(animal.animalId || animal.cowId).subscribe((removedAnimalId: string) => {
-      const animals: Animal[] = this.animalHelperService.removeAnimalFromList(this.animals$.getValue(), removedAnimalId);
+  private deleteAnimal(id: string): void {
+    this.animalsService.deleteAnimal(id).subscribe((removedAnimalId: string) => {
+      const animals: Animal[] = this.animalHelperService.deleteAnimal(this.animals$.getValue(), removedAnimalId);
       this.animals$.next(animals);
     });
   }

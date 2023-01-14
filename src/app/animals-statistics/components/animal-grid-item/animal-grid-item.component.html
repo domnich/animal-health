@@ -1,14 +1,14 @@
 <td class="row-controls">
-    <app-button *ngIf="!isEditableView; else showSaveBtn" [type]="'danger'" attr.data-animal-action="{{actionDelete}}"
-        attr.data-animal-id="{{animal.animalId || animal.cowId}}">
+    <app-button *ngIf="!isEditableView; else showSaveBtn" [type]="'danger'" (click)="delete()"
+        attr.data-animal-action="{{actionDelete}}" attr.data-animal-id="{{animal.animalId || animal.cowId}}">
         Delete
     </app-button>
     <ng-template #showSaveBtn>
-        <app-button [disabled]="isEmptyObject" [type]="'primary'" attr.data-animal-action="{{actionDelete}}"
-            (click)="create()" attr.data-animal-id="{{animal.animalId || animal.cowId}}">
+        <app-button [disabled]="isEmptyObject" [type]="'primary'" (click)="create()"
+            attr.data-animal-action="{{actionDelete}}" attr.data-animal-id="{{animal.animalId || animal.cowId}}">
             Create
         </app-button>
-        <app-button [type]="'secondary'" attr.data-animal-action="{{actionDelete}}" (click)="cancel()"
+        <app-button [type]="'secondary'" (click)="cancel()" attr.data-animal-action="{{actionDelete}}"
             attr.data-animal-id="{{animal.animalId || animal.cowId}}">
             Cancel
         </app-button>

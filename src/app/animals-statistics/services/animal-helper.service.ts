@@ -19,7 +19,7 @@ export class AnimalHelperService {
         });
     }
 
-    public updateItem(animal: Animal, value: UpdateValue<AnimalKeys>) {
+    public updateItem(animal: Animal, value: UpdateValue<AnimalKeys>): void {
         const newAnimal: Animal = this.getUpdatedAnimal(animal, value);
         this.gridActionsSource.next({
             action: ANIMAL_BUTTON_ACTIONS.UPDATE,
@@ -27,10 +27,27 @@ export class AnimalHelperService {
         });
     }
 
-    public createNewItem(animal: Animal) {
+    public createNewItem(animal: Animal): void {
         this.gridActionsSource.next({
             action: ANIMAL_BUTTON_ACTIONS.CREATE,
             data: animal
+        });
+    }
+
+    public deleteAnimal(animal: Animal): void {
+        this.gridActionsSource.next({
+            action: ANIMAL_BUTTON_ACTIONS.DELETE,
+            data: animal
+        });
+
+    }
+
+    public removeAnimalFromList(animals: Animal[], removedAnimalId: string): Animal[] {
+        return animals.filter(({ animalId, cowId }: { animalId: string, cowId: string }) => {
+            /**
+             * Check for animalId and cowId because some enteties has cowId and some has animalId
+             */
+            return animalId?.toString() !== removedAnimalId && cowId?.toString() !== removedAnimalId;
         });
     }
 
@@ -59,15 +76,6 @@ export class AnimalHelperService {
         }
 
         return animals;
-    }
-
-    public deleteAnimal(animals: Animal[], id: string): Animal[] {
-        return animals.filter(({ animalId, cowId }: { animalId: string, cowId: string }) => {
-            /**
-             * Check for animalId and cowId because some enteties has cowId and some has animalId
-             */
-            return animalId?.toString() !== id && cowId?.toString() !== id;
-        });
     }
 
     public getUpdatedAnimal(animal: Animal, updatedValue: UpdateValue<AnimalKeys>): Animal {

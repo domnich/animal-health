@@ -25,7 +25,7 @@ export class AnimalGridItemComponent implements OnInit {
     this.checkIfAllAnimalValuesAreEmpty();
   }
 
-  public onValueChange(event: any) {
+  public onValueChange(event: any): void {
     if (this.isEditableView) {
       this.animal = this.animalHelperService.getUpdatedAnimal(this.animal, event);
       this.checkIfAllAnimalValuesAreEmpty();
@@ -33,19 +33,23 @@ export class AnimalGridItemComponent implements OnInit {
     }
   }
 
-  public updateItem(value: UpdateValue<AnimalKeys>) {
+  public updateItem(value: UpdateValue<AnimalKeys>): void {
     this.animalHelperService.updateItem(this.animal, value);
   }
 
-  public cancel() {
+  public cancel(): void {
     this.animalHelperService.cancelNewItemCreation();
   }
 
-  public create() {
+  public create(): void {
     this.animalHelperService.createNewItem(this.animal);
   }
 
   private checkIfAllAnimalValuesAreEmpty(): void {
     this.isEmptyObject = this.animalHelperService.isEmptyObject(this.animal);
+  }
+
+  public delete(): void {
+    this.animalHelperService.deleteAnimal(this.animal);
   }
 }

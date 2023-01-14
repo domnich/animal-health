@@ -20,7 +20,7 @@ export class EditableItemComponent implements OnInit {
 
   ngOnInit(): void {
     /**
-     * Adds additional class to parent element for to visualy separate
+     * Adds additional class to parent element to visualy separate
      * editanle and not editable item for user
      */
     this.ref.nativeElement.parentElement.classList.add('has-hover');
